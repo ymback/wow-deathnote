@@ -7,10 +7,11 @@
 
 ## Notes: Keep fucking character away from you!
 
+Async.lua
 Command.lua
 Common.lua
 Core.lua
-Keeper.lua
-Async.lua
+Format.lua
+Keep.lua
 SendMessage.lua
 DeathNote.xml
