@@ -1,2 +1,2 @@
-# wow-deathnote
-A plugin for WOWer to keep fucking bad character, who need they cannot use but you need!
+# WoW Death Note
+Decentrelized credit system in World of Warcraft

@@ -1,17 +1,46 @@
 ## Interface: 11302
-## Title: DeathNote v0.1
-## Version: 0.1
+## Title: |cff00fe00DeathNote|r
+## Notes: decentrelized credit system addon.
+## Version: v0.0.1
 ## Author: ymback/grpubr/bigqiao
+## SavedVariables: DeathNote_Record, DeathNote_Profile
+## X-Embeds: Ace3, LibDataBroker-1.1, LibCompress
 
-## SavedVariables: DeathNote_Record,DeathNote_Profile
+# External libraries included by the packager
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\AceHook-3.0\AceHook-3.0.xml
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\AceComm-3.0\AceComm-3.0.xml
+Libs\AceSerializer-3.0\AceSerializer-3.0.xml
+Libs\LibCompress\lib.xml
 
-## Notes: Keep fucking character away from you!
 
-Async.lua
-Command.lua
-Common.lua
-Core.lua
-Format.lua
-Keep.lua
-SendMessage.lua
-DeathNote.xml
+# Locale file
+Locale\Locale.lua
+
+# Constant data files (no dependencies)
+Core\Const\__init.lua
+
+# Utility files (no dependencies)
+Core\__init.lua
+Core\API.lua
+Core\Util\Class.lua
+Core\Util\Format.lua
+
+# Lib Files which only depend on Util files
+Core\Lib\Addon.lua
+
+# Main addon file
+DeathNote.lua
+
+# Lib files which depend on the main addon file being loaded
+Core\Lib\SlashCommands.lua
+
+# Service files which depend on the main addon file being loaded
+Core\Service\Async\Receive.lua
+Core\Service\Async\Send.lua
+
+# Listener files which depend on the main addon file being loaded
+Core\Listener\AreaChangeListener.lua
+Core\Listener\WhisperListener.lua
