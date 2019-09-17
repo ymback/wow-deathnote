@@ -5,3 +5,56 @@
 ---
 
 local TSM = ...
+
+local DEBUG = false
+local DeathNote = CreateFrame("Frame")
+
+
+local function Debug(msg)
+  if ( DEBUG) then
+    print("DeathNote Debug: "..msg)
+  end
+end
+
+function DeathNote:OnEvent(event, ...)
+	print("DeathNote event: "..event)
+end
+
+function DeathNote:Help(self,command)
+	
+	
+  if ( command == "debug") then
+    DEBUG = not DEBUG
+	print("DEBUG = " .. DEBUG)
+  else
+    print("Hello World" ..command)
+  end
+end
+
+function DeathNote:OnLoad()
+	self:SetToplevel(true)
+	self:Hide()
+	self:SetScript("OnEvent", function(_,...)
+		self:OnEvent(...)
+	end)
+
+	for _,e in next, ({	"PLAYER_LOGIN" }) do
+		self:RegisterEvent(e)
+	end
+
+	--[[self.audioChannel = "master"
+	self.isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+
+	if self.isClassic then
+		self:RegisterEvent("LOOT_BIND_CONFIRM")
+	end]]
+end
+
+SLASH_DEATHNOTE1 = "/dn"
+SlashCmdList["DEATHNOTE"] = function(...)
+    DeathNote:Help(...)
+end
+
+-- Deathnote:UnregisterEvent("LOOT_OPENED")
+
+DeathNote:OnLoad()
