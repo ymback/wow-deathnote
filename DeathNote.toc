@@ -7,14 +7,7 @@
 ## X-Embeds: Ace3, LibDataBroker-1.1, LibCompress
 
 # External libraries included by the packager
-Libs\LibStub\LibStub.lua
-Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
-Libs\AceHook-3.0\AceHook-3.0.xml
-Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
-Libs\AceComm-3.0\AceComm-3.0.xml
-Libs\AceSerializer-3.0\AceSerializer-3.0.xml
-Libs\LibCompress\lib.xml
-
+embeds.xml
 
 # Locale file
 Locale\Locale.lua
