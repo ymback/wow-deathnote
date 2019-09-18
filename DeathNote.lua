@@ -5,3 +5,63 @@
 ---
 
 local TSM = ...
+
+local DEBUG = false
+DeathNote_Record = {}
+
+DeathNote = LibStub("AceAddon-3.0"):NewAddon("DeathNote")
+local DeathNote = DeathNote
+
+local AceComm = LibStub("AceComm-3.0")
+
+DeathNote.title = "DeathNote"
+DeathNote.version = GetAddOnMetadata(DeathNote.title, "Version")
+
+
+
+function DeathNote:OnInitialize()
+  -- Code that you want to run when the addon is first loaded goes here.
+  print("DeathNote Debug: OnInitialize")
+  
+  SLASH_DEATHNOTE1 = "/dn"
+  SlashCmdList["DEATHNOTE"] = function(...)
+    DeathNote:TestSend(...)
+  end
+end
+
+
+function DeathNote:OnEnable()
+    -- Called when the addon is enabled
+	print("DeathNote Debug: OnEnable")
+end
+
+function DeathNote:OnDisable()
+    -- Called when the addon is disabled
+	print("DeathNote Debug: OnDisable")
+end
+
+function DeathNote:TestSend(text,...)
+	print("DeathNote TestSend: " ..text)
+	local parsedCommand = string.lower(text)
+	if(parsedCommand == 'get') then
+		print("DeathNote TestSend:  get last value" ..DeathNote_Record["fuck"])
+	else
+		DeathNote_Record["fuck"] = text;
+	end
+	
+	
+	
+	--AceComm:SendCommMessage("DeathNote", "more data to send", "WHISPER", "charname")
+end
+
+
+function DeathNote:OnCommReceived(prefix, message, distribution, sender)
+    -- process the incoming message
+	print("DeathNote OnCommReceived: " ..prefix .."|" ..message .."|" ..distribution .."|" ..sender  )
+end
+
+DeathNote:RegisterComm("DeathNote")
+-- DeathNote:RegisterComm("DeathNote","OnCommReceived")
+
+
+
