@@ -7,54 +7,61 @@
 local TSM = ...
 
 local DEBUG = false
-local DeathNote = CreateFrame("Frame")
+DeathNote_Record = {}
+
+DeathNote = LibStub("AceAddon-3.0"):NewAddon("DeathNote")
+local DeathNote = DeathNote
+
+local AceComm = LibStub("AceComm-3.0")
+
+DeathNote.title = "DeathNote"
+DeathNote.version = GetAddOnMetadata(DeathNote.title, "Version")
 
 
-local function Debug(msg)
-  if ( DEBUG) then
-    print("DeathNote Debug: "..msg)
+
+function DeathNote:OnInitialize()
+  -- Code that you want to run when the addon is first loaded goes here.
+  print("DeathNote Debug: OnInitialize")
+  
+  SLASH_DEATHNOTE1 = "/dn"
+  SlashCmdList["DEATHNOTE"] = function(...)
+    DeathNote:TestSend(...)
   end
 end
 
-function DeathNote:OnEvent(event, ...)
-	print("DeathNote event: "..event)
+
+function DeathNote:OnEnable()
+    -- Called when the addon is enabled
+	print("DeathNote Debug: OnEnable")
 end
 
-function DeathNote:Help(self,command)
-	
-	
-  if ( command == "debug") then
-    DEBUG = not DEBUG
-	print("DEBUG = " .. DEBUG)
-  else
-    print("Hello World" ..command)
-  end
+function DeathNote:OnDisable()
+    -- Called when the addon is disabled
+	print("DeathNote Debug: OnDisable")
 end
 
-function DeathNote:OnLoad()
-	self:SetToplevel(true)
-	self:Hide()
-	self:SetScript("OnEvent", function(_,...)
-		self:OnEvent(...)
-	end)
-
-	for _,e in next, ({	"PLAYER_LOGIN" }) do
-		self:RegisterEvent(e)
+function DeathNote:TestSend(text,...)
+	print("DeathNote TestSend: " ..text)
+	local parsedCommand = string.lower(text)
+	if(parsedCommand == 'get') then
+		print("DeathNote TestSend:  get last value" ..DeathNote_Record["fuck"])
+	else
+		DeathNote_Record["fuck"] = text;
 	end
-
-	--[[self.audioChannel = "master"
-	self.isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
-
-	if self.isClassic then
-		self:RegisterEvent("LOOT_BIND_CONFIRM")
-	end]]
+	
+	
+	
+	--AceComm:SendCommMessage("DeathNote", "more data to send", "WHISPER", "charname")
 end
 
-SLASH_DEATHNOTE1 = "/dn"
-SlashCmdList["DEATHNOTE"] = function(...)
-    DeathNote:Help(...)
+
+function DeathNote:OnCommReceived(prefix, message, distribution, sender)
+    -- process the incoming message
+	print("DeathNote OnCommReceived: " ..prefix .."|" ..message .."|" ..distribution .."|" ..sender  )
 end
 
--- Deathnote:UnregisterEvent("LOOT_OPENED")
+DeathNote:RegisterComm("DeathNote")
+-- DeathNote:RegisterComm("DeathNote","OnCommReceived")
 
-DeathNote:OnLoad()
+
+
